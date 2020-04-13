@@ -3,13 +3,14 @@ package assess;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class PostmanTableModel extends AbstractTableModel implements TableModelListener {
 
 	private static final long serialVersionUID = 5767402190172442585L;
 
 	/** Table Date */
-	private Object[][] tableData;
+	private ArrayList<ArrayList<String>> tableData;
 	
 	/** Table Column Name */
 	private static final String[] columnNames = {"Folder", "Name", "Method", "URL"};
@@ -28,17 +29,20 @@ public class PostmanTableModel extends AbstractTableModel implements TableModelL
 	
 	public PostmanTableModel(int tableRowCount) {
 		this.tableRowCount = tableRowCount;
-		tableData = new Object[tableRowCount][TABLE_COLUMN_COUNT];
+		tableData = new ArrayList<>();
 		for(int i = 0; i < tableRowCount; i++) {
-			for(int j = 0; j < TABLE_COLUMN_COUNT; j++)
-				tableData[i][j] = new String("");
+			ArrayList<String> col = new ArrayList<>();
+			for(int j = 0; j < TABLE_COLUMN_COUNT; j++) {
+				col.add("");
+			}
+			tableData.add(col);
 		}
 
 		// add listener
 		addTableModelListener(this);
 	}
 	
-	public Object[][] getTabledata() {
+	public ArrayList<ArrayList<String>> getTabledata() {
 		return this.tableData;
 	}
  			
@@ -49,12 +53,12 @@ public class PostmanTableModel extends AbstractTableModel implements TableModelL
 
 	@Override
 	public int getRowCount() {
-		return tableRowCount;
+		return tableData.size();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return tableData[rowIndex][columnIndex];
+		return tableData.get(rowIndex).get(columnIndex);
 	}
 
 	@Override
@@ -77,8 +81,13 @@ public class PostmanTableModel extends AbstractTableModel implements TableModelL
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		tableData[rowIndex][columnIndex]=aValue;
+		tableData.get(rowIndex).set(columnIndex, aValue.toString());
 		fireTableDataChanged();
+	}
+
+	public void removeRow(int rowIndex) {
+		tableData.remove(rowIndex);
+		fireTableRowsDeleted(rowIndex, rowIndex);
 	}
 
 	//

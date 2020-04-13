@@ -18,7 +18,7 @@ public class BurpExtender implements IBurpExtender, IContextMenuFactory {
 	public static final String EXTENSION_NAME = "Postman Integration";
 
 	// Extension Version
-	public static final String VERSION_INFO = "1.2";
+	public static final String VERSION_INFO = "1.3";
 	
 	// JFrame Title
 	public static final String FRAME_TITLE = "Postman Integration";

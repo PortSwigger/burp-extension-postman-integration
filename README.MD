@@ -1,9 +1,13 @@
 <p align="center">
-  <img src="images/screen_image.png" alt="postman-integration"/>
+  <img src="images/1.3_screen_image.png" alt="postman-integration"/>
 </p>
 
 # Postman Integration
 Postman Integration is an extension to generate **Postman Collection fomat json file**.
+
+# 1.3 Update
+- Auto Grouping based on URL Path using Auto SET Button
+- Remove Duplicate URLs Button
 
 # Usage
 
